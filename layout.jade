@@ -1,0 +1,20 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		h1 NodeTest
+	body
+		div#student_table
+			table#test_table
+				thead
+					tr
+					th Name
+					th Age
+					th ID
+				tbody
+					tr
+					td#_itemName #{name}
+					td#_itemAge #{age}
+					td#_itemID #{ID} 
+	block content
