@@ -1,29 +1,26 @@
 var express = require('express');
 var path = require('path');
+var ejs = require('ejs');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mongoose = require('mongoose');
+ 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var student = require('./schema/mongodb');
 var app = express();
 
-/*
-var connectionString = 'localhost:27017/MyTestDB';
-var db = mongojs(connectionString);
-*/
-var mongoose = require('mongoose');
-var dbURL = 'localhost:27017/MyTestDB';
-var db = mongoose.createConnection(dbURL);
+//var dbUrl = "mongodb://localhost:27017/test";
+
+var db = mongoose.createConnection('localhost', 'test');//连接test数据库
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-/* app.set('view engine', 'html');
-app.engine('html', hbs._express); */
+/* app.set('view engine', 'jade'); */ 
+app.engine('.html', ejs.renderFile);
+app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -33,15 +30,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Make our db accessible to our router
-app.use(function (req, res, next) {
-    req.db = db;
-    next();
+app.use(function(req, res, next){
+	req.db = db;
+	next();
 });
 
 app.use('/', index);
 app.use('/users', users);
-/* app.use(express.static('routes')); */
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
