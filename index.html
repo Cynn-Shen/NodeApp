@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title><%= title %></title>
+		<!-- <link type = "text/css" href = "/css/bootstrap.min.css"></link> -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/style.css">
+		<script type = "text/javascript" src = "/javascripts/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div id = "pageBanner" >
+			<h2>* Test Authentication *</h2>
+		</div>
+		<div id = "register_form" class="form-group col-xs-4">
+			<form action = "/index/add" method = "POST">
+				<div>
+					<label for="email">Email address:</label>
+					<input type="email" class="form-control" id="email" placeholder = "E-mail">
+				</div>
+				<div>
+					<label for="pwd">Password:</label>
+					<input type="password" class="form-control" id="password" placeholder = "Password">
+				</div>
+					<div>
+					<label for="pwd">verification:</label>
+					<input type="password" class="form-control" id="passwordConf" placeholder = "Password Again">
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox"> Remember me</label>
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</div>
+	</body>
+</html>
